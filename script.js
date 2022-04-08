@@ -1,39 +1,22 @@
 // Assignment code here
 var passwordLength = 0;
-var lowerCase = false;
-var upperCase = false;
-var numeric = false;
-var specialCharacters = false;
 var passwordCharacters = [];
 var password ="";
 
 
 function generatePassword() {
+  debugger;
+  password = "";
+  passwordCharacters =[];
   choosePasswordLength();
-  chooseCharacterTypes();
   passwordOptions();
-
-  
   for(var i = 0; i < passwordLength; i++){
     x = Math.floor(Math.random() * passwordCharacters.length);
-    console.log(x);
-    password += passwordCharacters[x];
-    
-
-    
+    y = Math.floor(Math.random() * passwordCharacters[x].length);
+    password += passwordCharacters[x][y];
   }
   return password;
-
-
-  
-
-  
 }
-
-function randomLetter(){
-  Math.floor(Math.random() * passwordCharacters.length + 1);
-}
-
 function choosePasswordLength(){
   // prompt to ask for desired password length
   passwordLength = prompt("Choose a password length between 8 - 128 characters.")
@@ -41,58 +24,48 @@ function choosePasswordLength(){
   //Make sure password length is greater than 8 and shorter than 128
   if(passwordLength >= 8 && passwordLength <= 128){
     passwordLength = passwordLength;
-    
-
   }
   else{
+    console.log(passwordLength);
+    alert("Please choose between 8 and 128 characters");
     choosePasswordLength();
     return false;
-    
   }
 }
-
-function chooseCharacterTypes(){
-
-lowerCase = confirm("Would you like lowercase letters?");
-uppercase = confirm("would you like uppercase letters?");
-numeric = confirm("Would you like numbers?");
-specialCharacters = confirm("Would you like special characters?");
-
-
-}
-
 function passwordOptions(){
   var lowerCaseArray = ['a','b','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-  
   var upperCaseArray = ['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  var numericArray = ['1','2','3','4','5','6','7','8','9']; 
+  var specialCharacterArray = ['!','@','$','%','^','&','*','(',')','-','+','"',' ','#',"'",',','<','>','=','?','[',']','{','}','|','~'];
+
   
-  var numericArray = ['1','2','3','4','5','6','7','8','9'];
-  var specialCharacterArray = ['!','@','$','%','^','&','*','(',')','-','+'];
-
-  if(lowerCase){
-     passwordCharacters = passwordCharacters.concat(lowerCaseArray);
-     console.log(passwordCharacters);
+  //Ask user if they would like lower case letters
+  if(confirm("Would you like lowercase letters?")){
+     passwordCharacters.push(lowerCaseArray);
   }
 
-    if(upperCase){
-      passwordCharacters = passwordCharacters.concat(upperCaseArray);
-      console.log(passwordCharacters);
-
+  // Ask if user wants upper case letters
+  if(confirm("would you like uppercase letters?")){
+      passwordCharacters.push(upperCaseArray);
   }
-    if(numeric){
-      passwordCharacters = passwordCharacters.concat(numericArray);
-      console.log(passwordCharacters);
 
-  }
-    if(specialCharacters){
-      passwordCharacters = passwordCharacters.concat(specialCharacterArray);
+  if(confirm("Would you like numbers?")){
+      passwordCharacters.push(numericArray); 
       console.log(passwordCharacters);
+  }
+
+  // ask if user would like special characters
+  if(confirm("Would you like special characters?")){
+    passwordCharacters.push(specialCharacterArray);
+    console.log(passwordCharacters);
+  }
+  else if(passwordCharacters.length >= 1){
+        return passwordCharacters;
   }
   else{
-    alert("You have to choose at least one character type.")
-    return chooseCharacterTypes();
-  }
-
+      alert("You have to choose at least one character type.")
+      return passwordOptions();
+    }
   };
 
 // Get references to the #generate element
