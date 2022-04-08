@@ -5,7 +5,7 @@ var password ="";
 
 
 function generatePassword() {
-  debugger;
+  
   password = "";
   passwordCharacters =[];
   choosePasswordLength();
